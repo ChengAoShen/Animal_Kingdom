@@ -7,14 +7,14 @@ from mmengine.evaluator import BaseMetric
 from mmengine.registry import METRICS
 
 from sklearn.metrics import average_precision_score
-# from mmaction.evaluation import mean_average_precision
 
 
 @METRICS.register_module()
 class AnimalKingdomMetric(BaseMetric):
     """Custom mAP evaluation metric."""
 
-    default_prefix = 'mAP'
+    default_prefix = "mAP"
+
     def __init__(self, collect_device="cpu", prefix=None):
         super().__init__(collect_device=collect_device, prefix=prefix)
         self.results = []
@@ -198,50 +198,45 @@ class AnimalKingdomMetric(BaseMetric):
             ],
         )
 
-        segment_results = {"overall": [], "head": [], "middle": [], "tail": []}
-        # 进行数据集划分
-        for result in results:
-            index_list = []
-            for i in range(len(result["label"])):
-                if result["label"][i] == 1:
-                    index_list.append(i)
-            # if any(sub_elem in index_category["head"] for sub_elem in index_list):
-            #     segment_results["head"].append(result)
-
-            # if any(sub_elem in index_category["middle"] for sub_elem in index_list):
-            #     segment_results["middle"].append(result)
-
-            # if any(sub_elem in index_category["tail"] for sub_elem in index_list):
-            #     segment_results["tail"].append(result)
-
-            segment_results["head"].append(result)
-            segment_results["middle"].append(result)
-            segment_results["tail"].append(result)
-            segment_results["overall"].append(result)
+        eval_results = OrderedDict()
 
         # Compute mAP for each segment
-        eval_results = OrderedDict()
-        for segment, segment_result in segment_results.items():
-            preds = np.array([x["pred"] for x in segment_result])
-            labels = np.array([x["label"] for x in segment_result])
+        preds = np.array([x["pred"] for x in results])
+        labels = np.array([x["label"] for x in results])
+        for key, category in index_category.items():
+            preds_category = preds[:, category]
+            labels_category = labels[:, category]
 
-            if segment != "overall":
-                index_list = index_category[segment]
-                preds = preds[:, index_list]
-                labels = labels[:, index_list]
-
-            preds = preds[:, ~(np.all(labels == 0, axis=0))]
-            labels = labels[:, ~(np.all(labels == 0, axis=0))]
+            preds_category = preds_category[:, ~(np.all(labels_category == 0, axis=0))]
+            labels_category = labels_category[
+                :, ~(np.all(labels_category == 0, axis=0))
+            ]
 
             aps = [0]
             try:
-                aps = average_precision_score(labels, preds, average=None)
+                aps = average_precision_score(
+                    labels_category, preds_category, average=None
+                )
             except ValueError:
                 print(
                     "Average precision requires a sufficient number of samples \
                     in a batch which are missing in this sample."
                 )
-            mAP = np.mean(aps)
-            eval_results[f"{segment}_mAP"] = mAP
+
+            eval_results[f"{key}_mAP"] = np.mean(aps)
+
+        preds = preds[:, ~(np.all(labels == 0, axis=0))]
+        labels = labels[:, ~(np.all(labels == 0, axis=0))]
+        aps = [0]
+        try:
+            aps = average_precision_score(labels, preds, average=None)
+        except ValueError:
+            print(
+                "Average precision requires a sufficient number of samples \
+                in a batch which are missing in this sample."
+            )
+
+        overall_mAP = np.mean(aps)
+        eval_results["overall_mAP"] = overall_mAP
 
         return eval_results

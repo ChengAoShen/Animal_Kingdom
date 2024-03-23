@@ -2,15 +2,25 @@
 from .base import BaseWeightedLoss
 from .binary_logistic_regression_loss import BinaryLogisticRegressionLoss
 from .bmn_loss import BMNLoss
-from .cross_entropy_loss import (BCELossWithLogits, CBFocalLoss,
-                                 CrossEntropyLoss)
+from .cross_entropy_loss import BCELossWithLogits, CBFocalLoss, CrossEntropyLoss
 from .hvu_loss import HVULoss
 from .nll_loss import NLLLoss
 from .ohem_hinge_loss import OHEMHingeLoss
 from .ssn_loss import SSNLoss
+from .long_tail_loss import FocalLossWithLogits, LDAMLossWithLogits, EQLLossWithLogits
 
 __all__ = [
-    'BaseWeightedLoss', 'CrossEntropyLoss', 'NLLLoss', 'BCELossWithLogits',
-    'BinaryLogisticRegressionLoss', 'BMNLoss', 'OHEMHingeLoss', 'SSNLoss',
-    'HVULoss', 'CBFocalLoss'
+    "BaseWeightedLoss",
+    "CrossEntropyLoss",
+    "NLLLoss",
+    "BCELossWithLogits",
+    "BinaryLogisticRegressionLoss",
+    "BMNLoss",
+    "OHEMHingeLoss",
+    "SSNLoss",
+    "HVULoss",
+    "CBFocalLoss",
+    "FocalLossWithLogits",
+    "LDAMLossWithLogits",
+    "EQLLossWithLogits",
 ]

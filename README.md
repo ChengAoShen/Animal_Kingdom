@@ -1,15 +1,63 @@
-# Codebase for Animal Kingdom competition
+# Animal Kingdom Competition Code Repository
 
-The code repository is primarily used to participate in the ICME(2024) Multi-Modal Video Reasoning and Analyzing Competition (#Track 6 Animal Action Recognition) in the Animal Kingdom dataset. Based on the MMAction2 framework, we use this data set to train the Video Swin Transformer model and achieve high accuracy in the task of animal behavior recognition.
+> [Chinese Document]()
+
+This code repository is mainly used for participating in the ICME (2024) multimodal inference and analysis competition, specifically the animal behavior recognition track (#6) based on the Animal Kingdom dataset. We have trained the Video Swin Transformer model using this dataset based on the MMAction2 framework, achieving high accuracy in the task of animal behavior recognition.
 
 ## Data Preparation
 
-TODO
+All training/validation in this repository only requires the video dataset. It can be downloaded through official channels or [Baidu Netdisk](), and then extracted to `data/AnimalKingdom/dataset/video`.
 
-## Model download and loading
+![image-20240323223609938](https://raw.githubusercontent.com/ChengAoShen/Image-Hosting/main/images/image-20240323223609938.png)
 
-TODO
+> If a specific path is needed, it can be modified in the configuration file.
 
-## Model training/testing
+## Model Download and Loading
 
-TODO
+The best model can be downloaded from [here](), which includes a series of models trained with different loss functions, with the file names formatted as `overallmap_headmap_middlemap_tailmap`. After downloading, it is recommended to place them in the `data/model` path.
+
+Loading a specific model can be achieved by modifying the `load_from` variable in the configuration file. More details about the configuration file will be introduced in the model training/testing section.
+
+## Model Training/Testing
+
+Model training and testing mainly use the tools and configuration files that come with MMAction. All configuration files are located in the `mmaction2/work_dirs` path, mainly providing implementations of the swin-large model under different loss functions. More details about the content of the configuration files can be seen in the [mmaction2 official documentation](https://mmaction2.readthedocs.io/zh-cn/latest/user_guides/train_test.html).
+
+Assuming the current path is `mmaction2`, different commands are as follows:
+
+* Single card model training:
+
+  ```bash
+  python tools/train.py ${CONFIG_FILE}
+  ```
+
+  For example: `python tools/train.py work_dirs/swin-large_FocalLoss.py`
+
+* Multi-card model training:
+
+  ```bash
+  bash tools/dist_train.sh ${CONFIG} ${GPUS}
+  ```
+
+  For example: `bash tools/dist_train.sh work_dirs/swin-large_FocalLoss.py 8`
+
+* Single card testing:
+
+  ```bash
+  python tools/test.py ${CONFIG_FILE} ${CHECKPOINT_FILE}
+  ```
+
+  For example: `python tools/test.py work_dirs/swin-large_FocalLoss.py ../data/model/5263_6577_5861_4773.pth`
+
+* Multi-card testing:
+
+  ```bash
+  bash tools/dist_test.sh ${CONFIG} ${CHECKPOINT} ${GPUS}
+  ```
+
+  For example: `bash tools/dist_test.sh work_dirs/swin-large_FocalLoss.py ../data/model/5263_6577_5861_4773.pth 8`
+
+> Modifications to more configuration files can be made as needed.
+
+## License
+
+Apache-2.0 license
