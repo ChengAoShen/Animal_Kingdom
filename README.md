@@ -1,12 +1,12 @@
 # Animal Kingdom Competition Code Repository
 
-> [Chinese Document]()
+> [Chinese Document](https://github.com/ChengAoShen/Animal_Kingdom/blob/main/README_zh-CN.md)
 
 This code repository is mainly used for participating in the ICME (2024) multimodal inference and analysis competition, specifically the animal behavior recognition track (#6) based on the Animal Kingdom dataset. We have trained the Video Swin Transformer model using this dataset based on the MMAction2 framework, achieving high accuracy in the task of animal behavior recognition.
 
 ## Data Preparation
 
-All training/validation in this repository only requires the video dataset. It can be downloaded through official channels or [Baidu Netdisk](), and then extracted to `data/AnimalKingdom/dataset/video`.
+All training/validation in this repository only requires the video dataset. It can be downloaded through official channels or [Baidu Netdisk](https://pan.baidu.com/s/1mQQJwVIRWrnyeqjdwqJXoQ?pwd=f1D5), and then extracted to `data/AnimalKingdom/dataset/video`.
 
 ![image-20240323223609938](https://raw.githubusercontent.com/ChengAoShen/Image-Hosting/main/images/image-20240323223609938.png)
 
@@ -20,7 +20,7 @@ Loading a specific model can be achieved by modifying the `load_from` variable i
 
 ## Model Training/Testing
 
-Model training and testing mainly use the tools and configuration files that come with MMAction. All configuration files are located in the `mmaction2/work_dirs` path, mainly providing implementations of the swin-large model under different loss functions. More details about the content of the configuration files can be seen in the [mmaction2 official documentation](https://mmaction2.readthedocs.io/zh-cn/latest/user_guides/train_test.html).
+Model training and testing mainly use the tools and configuration files that come with MMAction. All configuration files are located in the `mmaction2/work_dirs` path, mainly providing implementations of the Swin-large model under different loss functions. More details about the content of the configuration files can be seen in the [mmaction2 official documentation](https://mmaction2.readthedocs.io/en/latest/user_guides/train_test.html).
 
 Assuming the current path is `mmaction2`, different commands are as follows:
 

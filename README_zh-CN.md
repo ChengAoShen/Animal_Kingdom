@@ -4,7 +4,7 @@
 
 ## 数据准备
 
-本仓库的所有训练/验证都只需要视频数据集进行参与。可以通过官方途径或者[百度网盘]()进行下载，将其解压放置于`data/AnimalKingdom/dataset/video`下。
+本仓库的所有训练/验证都只需要视频数据集进行参与。可以通过官方途径或者[百度网盘](https://pan.baidu.com/s/1mQQJwVIRWrnyeqjdwqJXoQ?pwd=f1D5)进行下载，将其解压放置于`data/AnimalKingdom/dataset/video`下。
 
 ![image-20240323223609938](https://raw.githubusercontent.com/ChengAoShen/Image-Hosting/main/images/image-20240323223609938.png)
 
