@@ -109,7 +109,7 @@ param_scheduler = [
 ]
 
 auto_scale_lr = dict(base_batch_size=12, enable=None)
-load_from = "/root/autodl-tmp/swin-large_checkpoints/5263_6577_5861_4773.pth"
+load_from = ""
 resume = False
 
 # 可视化配置

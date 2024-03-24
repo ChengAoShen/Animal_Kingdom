@@ -14,7 +14,7 @@ All training/validation in this repository only requires the video dataset. It c
 
 ## Model Download and Loading
 
-The best model can be downloaded from [here](), which includes a series of models trained with different loss functions, with the file names formatted as `overallmap_headmap_middlemap_tailmap`. After downloading, it is recommended to place them in the `data/model` path.
+The best model can be downloaded from [here](https://pan.baidu.com/s/1LoorB1KZffSMZ0zri4YZ-g?pwd=9L29 ), which includes a series of models trained with different loss functions, with the file names formatted as `overallmap_headmap_middlemap_tailmap`. After downloading, it is recommended to place them in the `data/model` path.
 
 Loading a specific model can be achieved by modifying the `load_from` variable in the configuration file. More details about the configuration file will be introduced in the model training/testing section.
 

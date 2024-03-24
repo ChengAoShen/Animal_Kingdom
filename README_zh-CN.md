@@ -12,7 +12,7 @@
 
 ## 模型下载与加载
 
-最佳的模型可以从[此处]()进行下载，其中包含不同Loss函数训练的一系列模型，文件名字按照`overallmap_headmap_middlemap_tailmap`。下载后建议将其放置于`data/model`路径下。
+最佳的模型可以从[此处](https://pan.baidu.com/s/1LoorB1KZffSMZ0zri4YZ-g?pwd=9L29 )进行下载，其中包含不同Loss函数训练的一系列模型，文件名字按照`overallmap_headmap_middlemap_tailmap`。下载后建议将其放置于`data/model`路径下。
 
 加载特定的模型通过修改配置文件中`load_from`变量进行实现。更多关于配置文件的部分将在模型训练/测试部分介绍。
 
